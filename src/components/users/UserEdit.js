@@ -10,7 +10,14 @@ import {
     useTranslate,
     required,
     email,
-    FieldProps, AutocompleteArrayInput, SimpleForm, NumberInput,
+    FieldProps,
+    AutocompleteArrayInput,
+    SimpleForm,
+    NumberInput,
+    SelectInput,
+    ReferenceArrayInput,
+    SelectArrayInput,
+    ReferenceInput,
 } from 'react-admin';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 // import { makeStyles } from '@mui/material/styles';
@@ -136,146 +143,11 @@ const VisitorForm = (props) => {
     const translate = useTranslate();
 
     return (
-        <FormWithRedirect
-            {...props}
-            validate={validatePasswords}
-            render={(formProps) => (
-                <Card>
-                    <form>
-                        <CardContent>
-                            <Box display={{ md: 'block', lg: 'flex' }}>
-                                <Box flex={2} mr={{ md: 0, lg: '1em' }}>
-                                    <Typography variant="h6" gutterBottom>
-                                        {translate(
-                                            'resources.users.fieldGroups.identity'
-                                        )}
-                                    </Typography>
-                                    <Box display={{ xs: 'block', sm: 'flex' }}>
-                                        <Box
-                                            flex={1}
-                                            mr={{ xs: 0, sm: '0.5em' }}
-                                        >
-                                            <TextInput
-                                                source="first_name"
-                                                resource="users"
-                                                validate={requiredValidate}
-                                                fullWidth
-                                            />
-                                        </Box>
-                                        <Box
-                                            flex={1}
-                                            ml={{ xs: 0, sm: '0.5em' }}
-                                        >
-                                            <TextInput
-                                                source="last_name"
-                                                resource="users"
-                                                validate={requiredValidate}
-                                                fullWidth
-                                            />
-                                        </Box>
-                                    </Box>
-                                    <TextInput
-                                        type="email"
-                                        source="email"
-                                        resource="users"
-                                        validate={[email(), required()]}
-                                        fullWidth
-                                    />
-                                    <Box display={{ xs: 'block', sm: 'flex' }}>
-                                        <Box
-                                            flex={1}
-                                            mr={{ xs: 0, sm: '0.5em' }}
-                                        >
-                                            <DateInput
-                                                source="birthday"
-                                                resource="users"
-                                                fullWidth
-                                                helperText={false}
-                                            />
-                                        </Box>
-                                        <Box
-                                            flex={2}
-                                            ml={{ xs: 0, sm: '0.5em' }}
-                                        />
-                                    </Box>
-
-                                    <Box mt="1em" />
-
-                                    <Typography variant="h6" gutterBottom>
-                                        {translate(
-                                            'resources.users.fieldGroups.location'
-                                        )}
-                                    </Typography>
-                                    <TextInput
-                                        source="location"
-                                        resource="users"
-                                        multiline
-                                        fullWidth
-                                        helperText={false}
-                                    />
-
-                                    <Box mt="1em" />
-
-                                    <Typography variant="h6" gutterBottom>
-                                        {translate(
-                                            'resources.users.fieldGroups.change_password'
-                                        )}
-                                    </Typography>
-                                    <Box display={{ xs: 'block', sm: 'flex' }}>
-                                        <Box
-                                            flex={1}
-                                            mr={{ xs: 0, sm: '0.5em' }}
-                                        >
-                                            <PasswordInput
-                                                source="password"
-                                                resource="users"
-                                                fullWidth
-                                            />
-                                        </Box>
-                                        <Box
-                                            flex={1}
-                                            ml={{ xs: 0, sm: '0.5em' }}
-                                        >
-                                            <PasswordInput
-                                                source="confirm_password"
-                                                resource="users"
-                                                fullWidth
-                                            />
-                                        </Box>
-                                    </Box>
-                                </Box>
-                                <Box
-                                    flex={1}
-                                    ml={{ xs: 0, lg: '1em' }}
-                                    mt={{ xs: '1em', lg: 0 }}
-                                >
-                                    <Typography variant="h6" gutterBottom>
-                                        {translate(
-                                            'resources.users.fieldGroups.stats'
-                                        )}
-                                    </Typography>
-                                    <div>
-                                        <NullableBooleanInput
-                                            source="has_newsletter"
-                                            resource="users"
-                                        />
-                                    </div>
-                                </Box>
-                            </Box>
-                        </CardContent>
-                        <Toolbar
-                            record={formProps.record}
-                            basePath={formProps.basePath}
-                            undoable={true}
-                            invalid={formProps.invalid}
-                            handleSubmit={formProps.handleSubmit}
-                            saving={formProps.saving}
-                            resource="users"
-                        />
-                    </form>
-                </Card>
-            )}
-        />
+        <Edit {...props}>
+            <SimpleForm>
+                <TextInput validate={required()} label='Название' source="options[title]" />
+            </SimpleForm>
+        </Edit>
     );
 };
 

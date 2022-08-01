@@ -33,7 +33,7 @@ const ListActions = (props) => (
 );
 
 const filters = [
-    <TextInput label="Search" source="q" alwaysOn />,
+    <TextInput key={'filter-q'} label="Search" source="q" alwaysOn />,
 ];
 
 const MyDatagridRow = ({ record, resource, id, onToggleItem, children, selected, selectable, basePath }) => (
@@ -57,7 +57,7 @@ const MyDatagridRow = ({ record, resource, id, onToggleItem, children, selected,
             <TextField source={'username'} record={record}/>
         </TableCell>
         <TableCell>
-            <div class={'email-field'}>
+            <div className={'email-field'}>
                 <EmailField source={'email'} record={record}/>
                 <Tooltip title={record.email_verified_at ? 'Верифицирован' : 'Не верифицирован'}>
                     {record.email_verified_at ? (

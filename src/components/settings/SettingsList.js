@@ -21,7 +21,7 @@ const ListActions = (props) => (
 );
 
 const ListFilters = [
-    <TextInput label="Search" source="q" alwaysOn />,
+    <TextInput key={'filter-q'} label="Search" source="q" alwaysOn />,
 ];
 
 const SettingsList = (props) => {

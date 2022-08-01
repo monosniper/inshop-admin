@@ -14,7 +14,7 @@ const LinkField = (props) => {
     }
 
     return props.isToSite ? (
-        <a target='_blank' href={link}>{props.field}</a>
+        <a target='_blank' rel="noreferrer" href={link}>{props.field}</a>
     ) : (
         <Link to={link}>{props.field}</Link>
     );
