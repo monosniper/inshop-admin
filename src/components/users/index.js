@@ -9,6 +9,6 @@ export default {
     list: UserList,
     icon: VisitorIcon,
     create: UserCreate,
-    edit : UserEdit,
+    // edit : UserEdit,
     show : UserShow,
 };

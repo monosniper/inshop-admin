@@ -8,7 +8,6 @@ import {
     PasswordInput,
     Toolbar,
     useTranslate,
-    FormWithRedirect,
     required,
     email,
     FieldProps, AutocompleteArrayInput, SimpleForm, NumberInput,

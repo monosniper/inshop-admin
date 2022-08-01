@@ -1,6 +1,6 @@
 import React from 'react';
 import {Create, required, SimpleForm, TextInput} from "react-admin";
-import RichTextInput from "ra-input-rich-text";
+import {RichTextInput} from "ra-input-rich-text";
 
 const SettingsCreate = (props) => {
     return (
