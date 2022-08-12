@@ -1,6 +1,6 @@
 import { defaultTheme } from 'react-admin';
 
-export const theme = {
+const theme = {
     ...defaultTheme,
     palette: {
         secondary: {
@@ -9,3 +9,5 @@ export const theme = {
         },
     },
 };
+
+export default theme

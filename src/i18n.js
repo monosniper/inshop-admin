@@ -42,6 +42,9 @@ const messages = {
         domains: {
             name: 'Домен |||| Домены',
         },
+        layoutOptions: {
+            name: 'Настройка магазина |||| Настройки магазина',
+        },
         shops: {
             name: 'Магазин |||| Магазины',
         },

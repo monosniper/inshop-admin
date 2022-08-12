@@ -10,6 +10,7 @@ import users from '../users';
 import domains from '../domains';
 import shops from '../shops';
 import modules from '../modules';
+import layoutOptions from '../layoutOptions';
 import feedBacks from '../feedBacks';
 import settings from '../settings';
 
@@ -58,6 +59,13 @@ const Navigation = ({ dense = false }) => {
                     smart_count: 2,
                 })}
                 leftIcon={<modules.icon />}
+            />
+            <Menu.Item
+                to="/layoutOptions"
+                primaryText={translate(`resources.layoutOptions.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<layoutOptions.icon />}
             />
             <Menu.Item
                 to="/feedBacks"

@@ -8,7 +8,9 @@ import {
     TextField,
     TextInput,
     TopToolbar,
-    CreateButton, ReferenceArrayField, ChipField, SingleFieldList
+    ReferenceOneField,
+    DeleteButton,
+    CreateButton, ReferenceField
 } from "react-admin";
 import SortableDatagridHeader from "../SortableDatagridHeader";
 
@@ -23,7 +25,7 @@ const ListFilters = [
     <TextInput key={'filter-q'} label="Search" source="q" alwaysOn  name={'q'}/>,
 ];
 
-const ModuleList = (props) => {
+const LayoutOptionList = (props) => {
     return (
         <>
             <List {...props}  sort={{ field: 'id', order: 'ASC' }} actions={<ListActions />} filters={ListFilters}>
@@ -33,19 +35,17 @@ const ModuleList = (props) => {
                     // header={<SortableDatagridHeader headerCells={headerCells} />}
                 >
                     <TextField source={'id'} />
-                    <TextField source={'title'} />
+                    <TextField source={'name'} />
                     <TextField source={'description'} />
-                    <NumberField source={'price'} />
-                    <ReferenceArrayField label={'Зависимости'} sort={false} source={'dependencies_ids'} reference={'modules'}>
-                        <SingleFieldList label={'Зависимости'}>
-                            <ChipField label={'Зависимости'} source="title" />
-                        </SingleFieldList>
-                    </ReferenceArrayField>
                     <TextField source={'slug'} />
+                    <ReferenceField reference={'layoutOptions'} target={'parent_id'} label={'Род. Опция'}  source={'parent_id'}>
+                        <TextField source={'name'} />
+                    </ReferenceField>
+                    <DeleteButton label={'Удалить'} />
                 </Datagrid>
             </List>
         </>
     );
 };
 
-export default ModuleList;
+export default LayoutOptionList;

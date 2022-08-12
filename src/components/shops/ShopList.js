@@ -32,7 +32,7 @@ const ShopList = (props) => {
         {id: 'options.title', label: 'Название'},
         {id: 'domain_id', label: 'Домен'},
         {id: 'user_id', label: 'Пользователь'},
-        {id: 'modules', label: 'Модули'},
+        {id: 'modules_ids', label: 'Модули'},
         {id: '', label: '', sortable: false},
     ];
 
@@ -52,7 +52,7 @@ const ShopList = (props) => {
                     <ReferenceField link={'show'} source="user_id" reference="users" sortable={false}>
                         <TextField source="email" />
                     </ReferenceField>
-                    <ReferenceArrayField label="Модули" reference="modules" source="modules" sortable={false}>
+                    <ReferenceArrayField label="Модули" reference="modules" source="modules_ids" sortable={false}>
                         <SingleFieldList>
                             <ChipField source="title" />
                         </SingleFieldList>
