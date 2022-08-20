@@ -11,8 +11,10 @@ import domains from '../domains';
 import shops from '../shops';
 import modules from '../modules';
 import layoutOptions from '../layoutOptions';
+import colors from '../colors';
 import feedBacks from '../feedBacks';
 import settings from '../settings';
+import social_networks from '../social_networks';
 
 const Navigation = ({ dense = false }) => {
     const [state, setState] = useState({
@@ -66,6 +68,20 @@ const Navigation = ({ dense = false }) => {
                     smart_count: 2,
                 })}
                 leftIcon={<layoutOptions.icon />}
+            />
+            <Menu.Item
+                to="/colors"
+                primaryText={translate(`resources.colors.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<colors.icon />}
+            />
+            <Menu.Item
+                to="/social_networks"
+                primaryText={translate(`resources.social_networks.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<social_networks.icon />}
             />
             <Menu.Item
                 to="/feedBacks"

@@ -25,7 +25,7 @@ const ListFilters = [
     <TextInput key={'filter-q'} label="Search" source="q" alwaysOn  name={'q'}/>,
 ];
 
-const LayoutOptionList = (props) => {
+const ColorList = (props) => {
     return (
         <>
             <List {...props}  sort={{ field: 'id', order: 'ASC' }} actions={<ListActions />} filters={ListFilters}>
@@ -38,9 +38,7 @@ const LayoutOptionList = (props) => {
                     <TextField source={'name'} />
                     <TextField source={'description'} />
                     <TextField source={'slug'} />
-                    <ReferenceField sortable={false} reference={'layoutOptions'} target={'parent_id'} label={'Род. Опция'}  source={'parent_id'}>
-                        <TextField source={'name'} />
-                    </ReferenceField>
+                    <TextField source={'default_value'} sortable={false} />
                     <DeleteButton label={'Удалить'} />
                 </Datagrid>
             </List>
@@ -48,4 +46,4 @@ const LayoutOptionList = (props) => {
     );
 };
 
-export default LayoutOptionList;
+export default ColorList;

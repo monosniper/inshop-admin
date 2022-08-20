@@ -6,7 +6,7 @@ const LayoutOptionEdit = (props) => {
         <Edit {...props}>
             <SimpleForm>
                 <TextInput validate={required()} label='Название' source="name"  name={''}/>
-                <TextInput validate={required()} label='Ключ' source="slug"  name={''}/>
+                <TextInput validate={required()} label='Ключ' source="origin_slug"  name={''}/>
                 <TextInput multiline validate={required()} label='Описание' source="description"  name={''}/>
                 <ReferenceInput label="Родительская опция" source="parent_id" reference="layoutOptions" name={''}>
                     <SelectInput optionText="name"  field={''} fieldState={''} formState={''} name={''} source={''}/>

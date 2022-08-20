@@ -1,11 +1,11 @@
-import ViewLayoutOptionIcon from '@mui/icons-material/ViewModule';
+import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
 import LayoutOptionList from "./LayoutOptionList";
 import LayoutOptionCreate from "./LayoutOptionCreate";
 import LayoutOptionEdit from "./LayoutOptionEdit";
 
 export default {
     list: LayoutOptionList,
-    icon: ViewLayoutOptionIcon,
+    icon: DisplaySettingsIcon,
     create: LayoutOptionCreate,
     edit : LayoutOptionEdit,
 };

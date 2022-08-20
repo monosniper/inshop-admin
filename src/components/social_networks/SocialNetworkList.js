@@ -25,7 +25,7 @@ const ListFilters = [
     <TextInput key={'filter-q'} label="Search" source="q" alwaysOn  name={'q'}/>,
 ];
 
-const LayoutOptionList = (props) => {
+const SocialNetworkList = (props) => {
     return (
         <>
             <List {...props}  sort={{ field: 'id', order: 'ASC' }} actions={<ListActions />} filters={ListFilters}>
@@ -35,12 +35,7 @@ const LayoutOptionList = (props) => {
                     // header={<SortableDatagridHeader headerCells={headerCells} />}
                 >
                     <TextField source={'id'} />
-                    <TextField source={'name'} />
-                    <TextField source={'description'} />
                     <TextField source={'slug'} />
-                    <ReferenceField sortable={false} reference={'layoutOptions'} target={'parent_id'} label={'Род. Опция'}  source={'parent_id'}>
-                        <TextField source={'name'} />
-                    </ReferenceField>
                     <DeleteButton label={'Удалить'} />
                 </Datagrid>
             </List>
@@ -48,4 +43,4 @@ const LayoutOptionList = (props) => {
     );
 };
 
-export default LayoutOptionList;
+export default SocialNetworkList;
