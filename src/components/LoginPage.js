@@ -50,7 +50,7 @@ const LoginPage = () => {
                 })
             }
         }
-    }, [isLoading])
+    }, [isLoading, router])
 
     // const [state, setState] = useState()
 
