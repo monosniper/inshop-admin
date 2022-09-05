@@ -36,7 +36,7 @@ const LoginPage = () => {
             });
 
             const {code, state} = query;
-
+            console.log(code, state, query, authenticated)
             if(code && state && state.length > 0 && !authenticated) {
                 $server.post('oauth/token', {
                     grant_type: 'authorization_code',
