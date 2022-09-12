@@ -16,6 +16,7 @@ import layoutOptions from "../components/layoutOptions";
 import feedBacks from "../components/feedBacks";
 import colors from "../components/colors";
 import social_networks from "../components/social_networks";
+import filters from "../components/filters";
 
 const App = () => {
     return (
@@ -42,6 +43,7 @@ const App = () => {
             <Resource name="feedBacks" {...feedBacks} />
             <Resource name="colors" {...colors} />
             <Resource name="social_networks" {...social_networks} />
+            <Resource name="filters" {...filters} />
             {/*<Resource name="tags" />*/}
             {/*<Resource name="offers" />*/}
             {/*<Resource name="questions" {...questions} />*/}

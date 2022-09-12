@@ -15,6 +15,7 @@ import colors from '../colors';
 import feedBacks from '../feedBacks';
 import settings from '../settings';
 import social_networks from '../social_networks';
+import filters from '../filters';
 
 const Navigation = ({ dense = false }) => {
     const [state, setState] = useState({
@@ -75,6 +76,13 @@ const Navigation = ({ dense = false }) => {
                     smart_count: 2,
                 })}
                 leftIcon={<colors.icon />}
+            />
+            <Menu.Item
+                to="/filters"
+                primaryText={translate(`resources.filters.name`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<filters.icon />}
             />
             <Menu.Item
                 to="/social_networks"

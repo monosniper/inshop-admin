@@ -42,6 +42,9 @@ const messages = {
         domains: {
             name: 'Домен |||| Домены',
         },
+        filters: {
+            name: 'Фильтр |||| Фильтры',
+        },
         colors: {
             name: 'Цвет |||| Цвета',
         },
