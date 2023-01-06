@@ -45,7 +45,7 @@ const ShopList = (props) => {
                     // header={<SortableDatagridHeader headerCells={headerCells} />}
                 >
                     <TextField source={'id'} />
-                    <TextField source={'options.title'} />
+                    <TextField source={'options.title'} label={'Название'} />
                     <ReferenceField link={'show'} source="domain_id" reference="domains" sortable={false}>
                         <TextField source="name" />
                     </ReferenceField>

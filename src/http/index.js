@@ -76,4 +76,10 @@ $server.interceptors.response.use((config) => {
     throw err;
 });
 
+export const $apiRoutes = {
+    files: {
+        delete: '/files/delete',
+    },
+}
+
 export {$api, $server};

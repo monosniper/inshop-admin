@@ -17,10 +17,15 @@ import feedBacks from "../components/feedBacks";
 import colors from "../components/colors";
 import social_networks from "../components/social_networks";
 import filters from "../components/filters";
+import {BrowserRouter} from "react-router-dom";
+
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
 const App = () => {
     return (
         <Admin
+            basename="/admin"
             dataProvider={dataProvider}
             authProvider={authProvider}
             i18nProvider={i18nProvider}
@@ -38,12 +43,12 @@ const App = () => {
             <Resource name="shops" {...shops} />
             <Resource name="users" {...users} />
             <Resource name="modules" {...modules} />
-            <Resource name="settings" {...settings} />
-            <Resource name="layoutOptions" {...layoutOptions} />
+            {/*<Resource name="settings" {...settings} />*/}
+            {/*<Resource name="layoutOptions" {...layoutOptions} />*/}
             <Resource name="feedBacks" {...feedBacks} />
-            <Resource name="colors" {...colors} />
+            {/*<Resource name="colors" {...colors} />*/}
             <Resource name="social_networks" {...social_networks} />
-            <Resource name="filters" {...filters} />
+            {/*<Resource name="filters" {...filters} />*/}
             {/*<Resource name="tags" />*/}
             {/*<Resource name="offers" />*/}
             {/*<Resource name="questions" {...questions} />*/}

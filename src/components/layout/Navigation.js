@@ -63,27 +63,27 @@ const Navigation = ({ dense = false }) => {
                 })}
                 leftIcon={<modules.icon />}
             />
-            <Menu.Item
-                to="/layoutOptions"
-                primaryText={translate(`resources.layoutOptions.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<layoutOptions.icon />}
-            />
-            <Menu.Item
-                to="/colors"
-                primaryText={translate(`resources.colors.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<colors.icon />}
-            />
-            <Menu.Item
-                to="/filters"
-                primaryText={translate(`resources.filters.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<filters.icon />}
-            />
+            {/*<Menu.Item*/}
+            {/*    to="/layoutOptions"*/}
+            {/*    primaryText={translate(`resources.layoutOptions.name`, {*/}
+            {/*        smart_count: 2,*/}
+            {/*    })}*/}
+            {/*    leftIcon={<layoutOptions.icon />}*/}
+            {/*/>*/}
+            {/*<Menu.Item*/}
+            {/*    to="/colors"*/}
+            {/*    primaryText={translate(`resources.colors.name`, {*/}
+            {/*        smart_count: 2,*/}
+            {/*    })}*/}
+            {/*    leftIcon={<colors.icon />}*/}
+            {/*/>*/}
+            {/*<Menu.Item*/}
+            {/*    to="/filters"*/}
+            {/*    primaryText={translate(`resources.filters.name`, {*/}
+            {/*        smart_count: 2,*/}
+            {/*    })}*/}
+            {/*    leftIcon={<filters.icon />}*/}
+            {/*/>*/}
             <Menu.Item
                 to="/social_networks"
                 primaryText={translate(`resources.social_networks.name`, {
@@ -98,13 +98,13 @@ const Navigation = ({ dense = false }) => {
                 })}
                 leftIcon={<feedBacks.icon />}
             />
-            <Menu.Item
-                to="/settings"
-                primaryText={translate(`resources.settings.name`, {
-                    smart_count: 2,
-                })}
-                leftIcon={<settings.icon />}
-            />
+            {/*<Menu.Item*/}
+            {/*    to="/settings"*/}
+            {/*    primaryText={translate(`resources.settings.name`, {*/}
+            {/*        smart_count: 2,*/}
+            {/*    })}*/}
+            {/*    leftIcon={<settings.icon />}*/}
+            {/*/>*/}
         </Menu>
         // <div
         //     className={classnames(classes.root, {

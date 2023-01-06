@@ -11,6 +11,7 @@ import {
     CreateButton, ReferenceArrayField, ChipField, SingleFieldList
 } from "react-admin";
 import SortableDatagridHeader from "../SortableDatagridHeader";
+import Description from "./Description";
 
 const ListActions = (props) => (
     <TopToolbar>
@@ -30,11 +31,11 @@ const ModuleList = (props) => {
                 <Datagrid
                     rowClick={'edit'}
                     {...props}
+                    expand={<Description />}
                     // header={<SortableDatagridHeader headerCells={headerCells} />}
                 >
                     <TextField source={'id'} />
                     <TextField source={'title'} />
-                    <TextField source={'description'} />
                     <NumberField source={'price'} />
                     <ReferenceArrayField label={'Зависимости'} sort={false} source={'dependencies_ids'} reference={'modules'}>
                         <SingleFieldList label={'Зависимости'}>

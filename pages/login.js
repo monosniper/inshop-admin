@@ -5,15 +5,15 @@ import {Notification, useAuthState, useLogin} from "react-admin";
 import OAuth2Login from "react-simple-oauth2-login";
 import {useRouter} from "next/router";
 import {Button} from "@mui/material";
-import styles from "../scss/Login.module.scss";
-import {$server} from "../http";
+import styles from "../src/scss/Login.module.scss";
+import {$server} from "../src/http";
 
 
 const LoginPage = () => {
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
-    const login = useLogin();
-    const { isLoading, authenticated } = useAuthState()
+    // const login = useLogin();
+    // const { isLoading, authenticated } = useAuthState()
 
     // const notify = useNotify();
     // const submit = (e) => {
@@ -27,32 +27,24 @@ const LoginPage = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const query = {};
-        const _query = router.asPath.split('?');
+        console.log(router.query.code)
 
-        if(Array.isArray(_query) && _query[1]) {
-            _query[1].split('&').forEach(par => {
-                par = par.split('=')
-                query[par[0]] = par[1]
-            });
+        const {code, state} = router.query
 
-            const {code, state} = query;
-            console.log(code, state, query, authenticated)
-            if(code && state && state.length > 0 && !authenticated) {
-                $server.post('oauth/token', {
-                    grant_type: 'authorization_code',
-                    client_id: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID,
-                    client_secret: process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET,
-                    redirect_uri: process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI,
-                    code,
-                }).then(rs => {
-                    const { access_token, refresh_token } = rs.data
-                    console.log('SUCCESS ', access_token, refresh_token)
-                    login({access_token, refresh_token})
-                })
-            }
+        if(code) {
+            $server.post('oauth/token', {
+                grant_type: 'authorization_code',
+                client_id: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID,
+                client_secret: process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET,
+                redirect_uri: process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI,
+                code,
+            }).then(rs => {
+                const { access_token, refresh_token } = rs.data
+                console.log(rs.data)
+                // login({access_token, refresh_token})
+            })
         }
-    }, [isLoading, router])
+    }, [router.query])
 
     // const [state, setState] = useState()
 
@@ -104,18 +96,18 @@ const LoginPage = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.block}>
-                {/*<OAuth2Login*/}
-                {/*    authorizationUrl={process.env.NEXT_PUBLIC_API_ORIGIN_URL + "/oauth/authorize"}*/}
-                {/*    responseType="code"*/}
-                {/*    isCrossOrigin={true}*/}
-                {/*    clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}*/}
-                {/*    redirectUri={process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI}*/}
-                {/*    onSuccess={onSuccess}*/}
-                {/*    onFailure={(rs) => console.error(rs)}*/}
-                {/*    state={''}*/}
-                {/*    render={({onClick}) => <Button onClick={onClick}>Авторизоваться</Button>}*/}
-                {/*/>*/}
-                <Button disabled={isLoading} onClick={handleAuth}>Авторизоваться</Button>
+                <OAuth2Login
+                    authorizationUrl={process.env.NEXT_PUBLIC_API_ORIGIN_URL + "/oauth/authorize"}
+                    responseType="code"
+                    isCrossOrigin={true}
+                    clientId={process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}
+                    redirectUri={process.env.NEXT_PUBLIC_OAUTH_CLIENT_REDIRECT_URI}
+                    onSuccess={onSuccess}
+                    onFailure={(rs) => console.error(rs)}
+                    state={''}
+                    render={({onClick}) => <Button onClick={onClick}>Авторизоваться</Button>}
+                />
+                {/*<Button disabled={isLoading} onClick={handleAuth}>Авторизоваться</Button>*/}
             </div>
         </div>
         // <FlexboxGrid justify="center" className="login-wrapper">

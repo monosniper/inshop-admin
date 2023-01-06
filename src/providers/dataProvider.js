@@ -1,5 +1,7 @@
 import simpleRestProvider from "ra-data-simple-rest";
+import buildGraphQLProvider from 'ra-data-graphql';
 import {fetchUtils} from "react-admin";
+import {newGraphQLClient} from "../lib/apollo";
 
 const fetchJson = (url, options = {}) => {
     options.user = {
@@ -12,17 +14,12 @@ const fetchJson = (url, options = {}) => {
 const simpleRestDataProvider = simpleRestProvider(process.env.NEXT_PUBLIC_API_ORIGIN_URL + '/api', fetchJson, 'X-Total-Count');
 
 const resources = {
-    orders: {
+    modules: {
         files: [
-            'order_files'
-        ]
-    },
-    lots: {
-        files: [
-            'archive',
+            'image',
             'images',
         ]
-    }
+    },
 }
 
 const requestWithConvertedFiles = (resource, params, origin) => {
@@ -79,11 +76,13 @@ const requestWithConvertedFiles = (resource, params, origin) => {
 
     return Promise.all(newFiles.map(convertFileToBase64))
         .then(base64Pictures =>
-            base64Pictures.map((picture64, i) => ({
-                src: picture64,
-                title: newFiles[i].file_name,
-                type: newFiles[i].type,
-            }))
+            base64Pictures.map((picture64, i) => {
+                return {
+                    src: picture64,
+                    title: newFiles[i].title,
+                    type: newFiles[i].type,
+                }
+            })
         )
         .then(transformedNewFiles => {
             let types = {};
@@ -107,11 +106,25 @@ const requestWithConvertedFiles = (resource, params, origin) => {
         });
 }
 
+
+
+// const dataProvider = async () => {
+//     // ...simpleRestDataProvider,
+//     // const graphQlProvider = await buildGraphQLProvider({ client: newGraphQLClient('localhost:5000') })
+//     // console.log(graphQlProvider)
+//     return {
+//         // ...graphQlProvider,
+//         ...simpleRestDataProvider,
+//         update: (resource, params) => requestWithConvertedFiles(resource, params, simpleRestDataProvider.update),
+//         create: (resource, params) => requestWithConvertedFiles(resource, params, simpleRestDataProvider.create),
+//     }
+// };
+
 const dataProvider = {
     ...simpleRestDataProvider,
     update: (resource, params) => requestWithConvertedFiles(resource, params, simpleRestDataProvider.update),
     create: (resource, params) => requestWithConvertedFiles(resource, params, simpleRestDataProvider.create),
-};
+}
 
 const convertFileToBase64 = file =>
     new Promise((resolve, reject) => {
