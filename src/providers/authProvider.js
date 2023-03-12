@@ -2,19 +2,38 @@ import {$api, $server} from "../http";
 const ADMIN_ROLE = 'admin';
 
 const authProvider = {
-    login: ({access_token, refresh_token}) => {
-        localStorage.setItem('access_token', access_token);
-        localStorage.setItem('refresh_token', refresh_token);
+    login: (code) => {
 
-        return $api.get('/user').then(rs => {
-            localStorage.setItem('auth', JSON.stringify(rs.data));
+        return $server.post('/oauth/token', {
+            client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
+            client_secret: process.env.REACT_APP_OAUTH_CLIENT_SECRET,
+            redirect_uri: process.env.REACT_APP_OAUTH_CLIENT_REDIRECT_URI,
+            grant_type: 'authorization_code',
+            code
+        }, {
+            headers: {
+                'Accept-Encoding': 'application/json',
+            }
+        }).then((rs) => {
+            const { data } = rs
 
-            return Promise.resolve();
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem('refresh_token', data.refresh_token);
+
+            return $api.get('/user', {
+                headers: {
+                    Authorization: "Bearer " + data.access_token,
+                    'Accept-Encoding': 'application/json',
+                }
+            }).then(rs => {
+                localStorage.setItem('auth', JSON.stringify(rs.data));
+
+                return Promise.resolve();
+            })
+        }).catch((err) => {
+            console.log(err)
+            return null;
         })
-
-        // $server.get('oauth/authorize?' + query).then((rs) => {
-        //     console.log(rs)
-        // })
 
         // return $server.post('/oauth/token', {
         //     client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
@@ -61,8 +80,8 @@ const authProvider = {
     checkError: (error) => {
         return Promise.resolve();
     },
-    checkAdmin: (user) => {
-        return user.isAdmin;
+    checkAdmin: (response) => {
+        return response.data.data.isAdmin;
     },
     checkAuth: () => {
         // return $server.post('/oauth/token', {
@@ -77,10 +96,10 @@ const authProvider = {
         //     return Promise.reject();
         // })
 
-        const user = JSON.parse(localStorage.getItem('auth'));
+        const user = localStorage.getItem('auth');
         const token = localStorage.getItem('access_token');
 
-        return user && token ? authProvider.checkAdmin(user) ? Promise.resolve() : Promise.reject('Для доступа к админ панели необходимо иметь права администратора') : Promise.reject();
+        return user && token ? Promise.resolve() : Promise.reject();
 
         // return $api.post('/refresh', {token: localStorage.api_token}).then(response => {
         //     return authProvider.checkAdmin(response) ? Promise.resolve() : Promise.reject();
@@ -93,8 +112,8 @@ const authProvider = {
     },
     getIdentity: async () => {
         try {
-            const { id, email, avatar } = JSON.parse(localStorage.getItem('auth'));
-            return Promise.resolve({ id, fullName: email, avatar });
+            const { id, fullname, avatar } = JSON.parse(localStorage.getItem('auth'));
+            return Promise.resolve({ id, fullName: fullname, avatar });
         } catch (error) {
             return Promise.reject(error);
         }
